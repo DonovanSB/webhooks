@@ -43,6 +43,7 @@ app.post('/facebook', async (req: any, res) => {
 
   if (entry) {
     const leads = await facebookService.getLeadsByEntry(entry);
+    console.log('leads', leads)
     received_updates.unshift(leads);
   }
 

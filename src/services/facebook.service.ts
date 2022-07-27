@@ -25,15 +25,13 @@ export class FacebookService {
     return lead;
   };
 
-  getLeadsByEntry = async (entry: Entry) => {
+  getLeadsByEntry = async (entry: Entry[]) => {
     const leads: any[] = [];
-    console.log('entry', entry)
-    if (entry.entry) {
-      for (let item of entry.entry) {
-        for (let change of item.changes) {
-          const lead = await this.getLead(change?.value?.leadgen_id);
-          leads.push(lead);
-        }
+    console.log('entry', entry);
+    for (let item of entry) {
+      for (let change of item.changes) {
+        const lead = await this.getLead(change?.value?.leadgen_id);
+        leads.push(lead);
       }
     }
     return leads;
