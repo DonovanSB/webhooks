@@ -1,5 +1,5 @@
 export interface Entry {
-  entries: EntryElement[];
+  entry: EntryElement[];
 }
 
 export interface EntryElement {
