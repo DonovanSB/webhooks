@@ -1,17 +1,18 @@
 import bodyParser from 'body-parser';
 import express from 'express';
+require('dotenv').config();
+import { PORT, VERIFICATION_TOKEN } from './config/config';
+import facebookService from './services/facebook.service';
+import { Entry } from './types/webhook.types';
 const app = express();
 var xhub = require('express-x-hub');
-require('dotenv').config();
 
-const port = process.env.PORT || 5500
-app.set('port', port);
+app.set('port', PORT);
 app.listen(app.get('port'));
 
 app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
 app.use(bodyParser.json());
 
-var token = process.env.TOKEN || 'token';
 const received_updates: any[] = [];
 
 app.get('/', (req, res) => {
@@ -21,7 +22,7 @@ app.get('/', (req, res) => {
 app.get('/facebook', (req, res) => {
   if (
     req.query['hub.mode'] == 'subscribe' &&
-    req.query['hub.verify_token'] == token
+    req.query['hub.verify_token'] == VERIFICATION_TOKEN
   ) {
     res.send(req.query['hub.challenge']);
   } else {
@@ -30,8 +31,6 @@ app.get('/facebook', (req, res) => {
 });
 
 app.post('/facebook', (req: any, res) => {
-  console.log('Facebook request body:', req.body);
-
   if (!req.isXHubValid()) {
     console.log(
       'Warning - request header X-Hub-Signature not present or invalid'
@@ -40,12 +39,17 @@ app.post('/facebook', (req: any, res) => {
     return;
   }
 
-  console.log('request header X-Hub-Signature validated');
+  const { entry } = req.body;
+
+  if (entry) {
+    const leads = facebookService.getLeadsByEntry(entry);
+    received_updates.unshift(leads);
+  }
+
   // Process the Facebook updates here
-  received_updates.unshift(req.body);
   res.sendStatus(200);
 });
 
-app.listen(()=>{
-  console.log(`Servidor iniciado en http://localhost:${port}`)
+app.listen(() => {
+  console.log(`Servidor iniciado en http://localhost:${PORT}`);
 });
