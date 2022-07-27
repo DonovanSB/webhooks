@@ -27,6 +27,7 @@ export class FacebookService {
 
   getLeadsByEntry = async (entry: Entry) => {
     const leads: any[] = [];
+    console.log('entry', entry)
     if (entry.entry) {
       for (let item of entry.entry) {
         for (let change of item.changes) {
