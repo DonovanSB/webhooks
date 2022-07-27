@@ -21,21 +21,22 @@ export class FacebookService {
   getLead = async (id: string) => {
     const fields: any[] = [];
     const params = {};
-    const lead:LeadResponse = await new Lead(id).get(fields, params);
+    const lead: LeadResponse = await new Lead(id).get(fields, params);
     return lead;
   };
 
   getLeadsByEntry = async (entry: Entry) => {
     const leads: any[] = [];
-    if(entry.entries) {
-      for(let item of entry.entries) {
-        for(let change of item.changes) {
+    if (entry.entries) {
+      for (let item of entry.entries) {
+        for (let change of item.changes) {
           const lead = await this.getLead(change?.value?.leadgen_id);
           leads.push(lead);
         }
       }
     }
-  }
+    return leads;
+  };
 }
 
 const facebookService = new FacebookService();

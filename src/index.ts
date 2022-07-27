@@ -30,7 +30,7 @@ app.get('/facebook', (req, res) => {
   }
 });
 
-app.post('/facebook', (req: any, res) => {
+app.post('/facebook', async (req: any, res) => {
   if (!req.isXHubValid()) {
     console.log(
       'Warning - request header X-Hub-Signature not present or invalid'
@@ -42,7 +42,7 @@ app.post('/facebook', (req: any, res) => {
   const { entry } = req.body;
 
   if (entry) {
-    const leads = facebookService.getLeadsByEntry(entry);
+    const leads = await facebookService.getLeadsByEntry(entry);
     received_updates.unshift(leads);
   }
 
