@@ -3,9 +3,9 @@ import express from 'express';
 require('dotenv').config();
 import { PORT, VERIFICATION_TOKEN } from './config/config';
 import facebookService from './services/facebook.service';
-import { Entry } from './types/webhook.types';
-const app = express();
 var xhub = require('express-x-hub');
+
+const app = express();
 
 app.set('port', PORT);
 app.listen(app.get('port'));
@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
   res.send('<pre>' + JSON.stringify(received_updates, null, 2) + '</pre>');
 });
 
+// @INFO: Rutas para integración con Facebook
 app.get('/facebook', (req, res) => {
   if (
     req.query['hub.mode'] == 'subscribe' &&
@@ -30,6 +31,7 @@ app.get('/facebook', (req, res) => {
   }
 });
 
+// @INFO: Rutas para integración con Facebook
 app.post('/facebook', async (req: any, res) => {
   if (!req.isXHubValid()) {
     console.log(
@@ -41,9 +43,9 @@ app.post('/facebook', async (req: any, res) => {
 
   const { entry } = req.body;
 
-  if (entry) {
+  if (entry?.length > 0) {
     const leads = await facebookService.getLeadsByEntry(entry);
-    console.log('leads', leads)
+    console.log('leads', leads);
     received_updates.unshift(...leads);
   }
 
