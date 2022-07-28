@@ -41,15 +41,14 @@ app.post('/facebook', async (req: any, res) => {
     return;
   }
 
-  console.log('body', req.body);
   const { entry } = req.body;
   received_updates.unshift(req.body);
 
-  // if (entry?.length > 0) {
-  //   const leads = await facebookService.getLeadsByEntry(entry);
-  //   console.log('leads', leads);
-  //   received_updates.unshift(...leads);
-  // }
+  if (entry?.length > 0) {
+    const leads = await facebookService.getLeadsByEntry(entry);
+    console.log('leads', leads);
+    received_updates.unshift(...leads);
+  }
 
   // Process the Facebook updates here
   res.sendStatus(200);
