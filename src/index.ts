@@ -3,7 +3,7 @@ import express from 'express';
 require('dotenv').config();
 import { PORT, VERIFICATION_TOKEN } from './config/config';
 import facebookService from './services/facebook.service';
-var xhub = require('express-x-hub');
+const xhub = require('express-x-hub');
 
 const app = express();
 
