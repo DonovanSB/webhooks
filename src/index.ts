@@ -41,6 +41,7 @@ app.post('/facebook', async (req: any, res) => {
     return;
   }
 
+  console.log('body', req.body);
   const { entry } = req.body;
 
   if (entry?.length > 0) {
