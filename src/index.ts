@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 const received_updates: any[] = [];
 
 app.get('/', (req, res) => {
-  res.send('<pre>' + JSON.stringify(received_updates, null, 2) + '</pre>');
+  res.json(received_updates);
 });
 
 // @INFO: Rutas para integración con Facebook
