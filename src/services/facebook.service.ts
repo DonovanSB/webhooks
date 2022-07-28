@@ -36,7 +36,7 @@ export class FacebookService {
     const fields: any[] = [];
     const params = {};
     const lead: LeadResponse = await new Lead(id).get(fields, params);
-    return this.mapLead(lead._data);
+    return lead;
   };
 
   getLeadsByEntry = async (entry: Entry[]) => {
@@ -44,7 +44,7 @@ export class FacebookService {
     for (let item of entry) {
       for (let change of item.changes) {
         const lead = await this.getLead(change?.value?.leadgen_id);
-        lead && leads.push(lead);
+        lead._data && leads.push(lead._data);
       }
     }
     return leads;
