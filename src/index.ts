@@ -53,7 +53,6 @@ app.post('/facebook', async (req: any, res) => {
   res.sendStatus(200);
 });
 
-app.listen(async() => {
+app.listen(() => {
   console.log(`Servidor iniciado en http://localhost:${PORT}`);
-  await facebookService.getLead('algo')
 });
