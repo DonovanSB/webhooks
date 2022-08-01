@@ -11,7 +11,7 @@ app.set('port', PORT);
 app.listen(app.get('port'));
 
 app.use(bodyParser.json());
-app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
+// app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
 
 const received_updates: any[] = [];
 let current_entry: any;
@@ -37,13 +37,13 @@ app.get('/facebook', (req, res) => {
 
 // @INFO: Rutas para integración con Facebook
 app.post('/facebook', async (req: any, res) => {
-  if (req.isXHubValid && !req.isXHubValid()) {
-    console.log(
-      'Warning - request header X-Hub-Signature not present or invalid'
-    );
-    res.sendStatus(401);
-    return;
-  }
+  // if (req.isXHubValid && !req.isXHubValid()) {
+  //   console.log(
+  //     'Warning - request header X-Hub-Signature not present or invalid'
+  //   );
+  //   res.sendStatus(401);
+  //   return;
+  // }
 
   const { entry } = req.body;
 
