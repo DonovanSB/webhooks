@@ -20,3 +20,13 @@ url de verificación:
 ```
 https://kuepa-webhooks.herokuapp.com/facebook
 ```
+![Url devolución de llamada](https://github.com/DonovanSB/webhooks/blob/main/assets/subscription.png)
+
+Adicionalmente, buscar el campo leadgen y realizar la suscripción
+![Url devolución de llamada](https://github.com/DonovanSB/webhooks/blob/main/assets/lead-subs.png)
+
+Además, es necesario instalar la aplicación usando el id de la pagina de facebook, siguiendo los pasos encontrados en [Webhooks for leads](https://developers.facebook.com/docs/graph-api/webhooks/getting-started/webhooks-for-leadgen). El metodo mas simple es usando el [Graph API Explorer](https://developers.facebook.com/tools/explorer).
+
+
+
+

@@ -10,8 +10,8 @@ const app = express();
 app.set('port', PORT);
 app.listen(app.get('port'));
 
-app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
 app.use(bodyParser.json());
+app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
 
 const received_updates: any[] = [];
 let current_entry: any;
