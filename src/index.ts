@@ -3,15 +3,15 @@ import express from 'express';
 require('dotenv').config();
 import { PORT, VERIFICATION_TOKEN } from './config/config';
 import facebookService from './services/facebook.service';
-const xhub = require('express-x-hub');
+// const xhub = require('express-x-hub');
 
 const app = express();
 
 app.set('port', PORT);
 app.listen(app.get('port'));
 
-app.use(bodyParser.json());
 // app.use(xhub({ algorithm: 'sha1', secret: process.env.APP_SECRET }));
+app.use(bodyParser.json());
 
 const received_updates: any[] = [];
 let current_entry: any;
@@ -37,7 +37,7 @@ app.get('/facebook', (req, res) => {
 
 // @INFO: Rutas para integración con Facebook
 app.post('/facebook', async (req: any, res) => {
-  // if (!req.isXHubValid || (req.isXHubValid && !req.isXHubValid())) {
+  // if (!req.isXHubValid()) {
   //   console.log(
   //     'Warning - request header X-Hub-Signature not present or invalid'
   //   );
