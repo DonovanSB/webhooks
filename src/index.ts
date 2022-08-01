@@ -37,7 +37,7 @@ app.get('/facebook', (req, res) => {
 
 // @INFO: Rutas para integración con Facebook
 app.post('/facebook', async (req: any, res) => {
-  if (!req.isXHubValid()) {
+  if (req.isXHubValid && !req.isXHubValid()) {
     console.log(
       'Warning - request header X-Hub-Signature not present or invalid'
     );
