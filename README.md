@@ -27,6 +27,8 @@ Adicionalmente, buscar el campo leadgen y realizar la suscripción
 
 Además, es necesario instalar la aplicación usando el id de la pagina de facebook, siguiendo los pasos encontrados en [Webhooks for leads](https://developers.facebook.com/docs/graph-api/webhooks/getting-started/webhooks-for-leadgen). El método mas simple es usando el [Graph API Explorer](https://developers.facebook.com/tools/explorer).
 
+![Ejemplo suscripción](https://github.com/DonovanSB/webhooks/blob/main/assets/install-app.png)
+
 
 # 2. Generación de token sin caducidad
 Los pasos para generar tokens de larga duración se pueden encontrar en siguiente [Enlace](https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived#get-a-long-lived-page-access-token).
